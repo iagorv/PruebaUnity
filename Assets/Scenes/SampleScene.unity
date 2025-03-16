@@ -410,7 +410,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 40
-    OrthographicSize: 10
+    OrthographicSize: 4.39
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -443,17 +443,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &332492337 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3153138061305482140, guid: c324215c7a290ec48b3ca5dd7bb00700, type: 3}
-  m_PrefabInstance: {fileID: 7128868146493841973}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdc3e9ddc23b5134ba002dfab7ff0553, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &332492340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3610486670000068419, guid: c324215c7a290ec48b3ca5dd7bb00700, type: 3}
@@ -566,7 +555,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 4.39
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -900,34 +889,6 @@ PrefabInstance:
     - target: {fileID: 3610486670000068419, guid: c324215c7a290ec48b3ca5dd7bb00700, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644233325944463762, guid: c324215c7a290ec48b3ca5dd7bb00700, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644233325944463762, guid: c324215c7a290ec48b3ca5dd7bb00700, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644233325944463762, guid: c324215c7a290ec48b3ca5dd7bb00700, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 332492337}
-    - target: {fileID: 4644233325944463762, guid: c324215c7a290ec48b3ca5dd7bb00700, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644233325944463762, guid: c324215c7a290ec48b3ca5dd7bb00700, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnMove
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644233325944463762, guid: c324215c7a290ec48b3ca5dd7bb00700, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644233325944463762, guid: c324215c7a290ec48b3ca5dd7bb00700, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5249872956625863924, guid: c324215c7a290ec48b3ca5dd7bb00700, type: 3}
       propertyPath: m_GravityScale
