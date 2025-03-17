@@ -1,3 +1,4 @@
+using System;
 using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,6 +9,36 @@ public class PlayerController : MonoBehaviour
 {
 
     public float walkSpeed = 5f;
+    public float runSpeed = 8f;
+
+
+    public float CurrentMoveSpeed
+    {
+        get
+        {
+            if (IsMoving)
+            {
+                if (IsRunning)
+                {
+                    return runSpeed;
+
+                }
+                else
+                {
+                    return walkSpeed;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+
+
+
+
+
     Vector2 moveInput;
     [SerializeField]
     private bool _isMoving = false;
@@ -42,6 +73,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    public bool _isFacingRigth = true;
+    public bool IsFacingRigth
+    {
+        get { return _isFacingRigth; }
+        private set
+        {
+            if (_isFacingRigth != value)
+            {
+                transform.localScale *= new Vector2(-1, 1);
+            }
+            _isFacingRigth = value;
+        }
+    }
+
     Rigidbody2D rb;
     Animator animator;
 
@@ -66,7 +112,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveInput.x * walkSpeed, rb.linearVelocityY);
+        rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocityY);
 
     }
 
@@ -75,6 +121,22 @@ public class PlayerController : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
 
         IsMoving = moveInput != Vector2.zero;
+
+        SetFacingDirection(moveInput);
+
+
+    }
+
+    private void SetFacingDirection(Vector2 moveInput)
+    {
+        if (moveInput.x > 0 && !IsFacingRigth)
+        {
+            IsFacingRigth = true;
+        }
+        else if (moveInput.x < 0 && IsFacingRigth)
+        {
+            IsFacingRigth = false;
+        }
 
 
 
@@ -93,5 +155,5 @@ public class PlayerController : MonoBehaviour
 
 
 
-    } 
+    }
 }
