@@ -3,13 +3,17 @@ using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
 
 public class PlayerController : MonoBehaviour
 {
 
     public float walkSpeed = 5f;
     public float runSpeed = 8f;
+    private float jumpImpulse = 10f;
+
+
+    TouchingDirections touchingDirections;
 
 
     public float CurrentMoveSpeed
@@ -95,24 +99,17 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        touchingDirections = GetComponent<TouchingDirections>();
     }
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 
     private void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocityY);
+
+        animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocityY);
 
     }
 
@@ -154,6 +151,16 @@ public class PlayerController : MonoBehaviour
         }
 
 
+
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if(context.started && touchingDirections.IsGrounded)
+        {
+            animator.SetTrigger(AnimationStrings.jump);
+            rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpImpulse);
+        }
 
     }
 }
