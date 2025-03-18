@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public float walkSpeed = 5f;
     public float runSpeed = 8f;
-    private float jumpImpulse = 10f;
+    private float jumpImpulse = 9.8f;
 
 
     TouchingDirections touchingDirections;
@@ -156,7 +156,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(context.started && touchingDirections.IsGrounded)
+        if(context.started && touchingDirections.IsGrounded || Time.time - touchingDirections.lastGroundedTime <= touchingDirections.coyoteTime)
         {
             animator.SetTrigger(AnimationStrings.jump);
             rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpImpulse);

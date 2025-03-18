@@ -9,6 +9,13 @@ public class TouchingDirections : MonoBehaviour
     public float wallDistance = 0.2f;
     public float ceilingDistance = 0.05f;
 
+    [SerializeField] public float coyoteTime = 0.2f; // Tiempo que permite el salto después de caer
+    public float lastGroundedTime; // Último momento en que estuvo en el suelo
+
+
+
+
+
     CapsuleCollider2D touchingCol;
     Animator animator;
     RaycastHit2D[] groundhits = new RaycastHit2D[5];
@@ -20,6 +27,11 @@ public class TouchingDirections : MonoBehaviour
 
     [SerializeField]
     private bool _isGrounded;
+
+
+
+
+
     public bool IsGrounded
     {
         get
@@ -86,7 +98,14 @@ public class TouchingDirections : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         IsGrounded = touchingCol.Cast(Vector2.down, castFilter, groundhits, groundDistance) > 0;
+
+        if (IsGrounded)
+        {
+            lastGroundedTime = Time.time; // Guarda el tiempo actual si está en el suelo
+        }
+
 
         IsOnWall = touchingCol.Cast(wallCheckDirection, castFilter, wallHits, wallDistance) > 0;
 
