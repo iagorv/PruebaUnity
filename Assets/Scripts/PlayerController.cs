@@ -163,7 +163,9 @@ public class PlayerController : MonoBehaviour
 {
     if (context.started)
     {
-        if (touchingDirections.IsGrounded || Time.time - touchingDirections.lastGroundedTime <= touchingDirections.coyoteTime)
+   
+        if(context.started && touchingDirections.IsGrounded || Time.time - touchingDirections.lastGroundedTime <= touchingDirections.coyoteTime)
+
         {
             // Salto desde el suelo
             Jump(jumpImpulse);
