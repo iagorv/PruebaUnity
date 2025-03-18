@@ -10,7 +10,12 @@ public class PlayerController : MonoBehaviour
 
     public float walkSpeed = 5f;
     public float runSpeed = 8f;
-    private float jumpImpulse = 9.8f;
+    private float jumpImpulse = 9f;
+
+      private float doubleJumpImpulse = 5f;
+
+    public int numSaltos = 0;
+    public int numSaltosMaximos = 1;
 
 
     TouchingDirections touchingDirections;
@@ -103,7 +108,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    
+
 
     private void FixedUpdate()
     {
@@ -154,13 +159,30 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+ public void OnJump(InputAction.CallbackContext context)
+{
+    if (context.started)
     {
-        if(context.started && touchingDirections.IsGrounded || Time.time - touchingDirections.lastGroundedTime <= touchingDirections.coyoteTime)
+        if (touchingDirections.IsGrounded || Time.time - touchingDirections.lastGroundedTime <= touchingDirections.coyoteTime)
         {
-            animator.SetTrigger(AnimationStrings.jump);
-            rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpImpulse);
+            // Salto desde el suelo
+            Jump(jumpImpulse);
+            numSaltos = 1;
         }
-
+        else if (numSaltos < numSaltosMaximos)
+        {
+            // Salto en el aire (doble salto)
+              Jump(doubleJumpImpulse);
+            numSaltos = 2;
+           
+        }
     }
+}
+
+    
+private void Jump(float impulso)
+{
+    animator.SetTrigger(AnimationStrings.jump);
+    rb.linearVelocity = new Vector2(rb.linearVelocityX, impulso);
+}
 }
