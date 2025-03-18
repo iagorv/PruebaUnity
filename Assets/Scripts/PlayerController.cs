@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
-            if (IsMoving)
+            if (IsMoving && !touchingDirections.IsOnWall)
             {
                 if (IsRunning)
                 {
