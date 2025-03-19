@@ -104,7 +104,16 @@ public class TouchingDirections : MonoBehaviour
         if (IsGrounded)
         {
             lastGroundedTime = Time.time; // Guarda el tiempo actual si está en el suelo
-            GetComponent<PlayerController>().numSaltos = 0; // Resetea los saltos cuando toca el suelo
+
+
+            PlayerController player = GetComponent<PlayerController>();
+            if (player != null)
+            {
+                player.numSaltos = 0; // Solo se ejecuta si hay un PlayerController
+            }
+
+
+            
 
 
         }
@@ -119,5 +128,5 @@ public class TouchingDirections : MonoBehaviour
 
 
 
-    
+
 }

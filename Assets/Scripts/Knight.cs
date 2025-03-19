@@ -1,5 +1,9 @@
+using System;
 using UnityEngine;
 
+
+
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
 public class Knight : MonoBehaviour
 {
     public float walkSpeed = 3f;
@@ -7,12 +11,13 @@ public class Knight : MonoBehaviour
 
 
     Rigidbody2D rb;
+    TouchingDirections touchingDirections;
 
     public enum WalkableDirection { Right, Left }
 
 
     private WalkableDirection _walkDirection;
-    private Vector2 walkDirectionVector;
+    private Vector2 walkDirectionVector = Vector2.right;
 
     public WalkableDirection WalkDirection
     {
@@ -43,12 +48,38 @@ public class Knight : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        touchingDirections = GetComponent<TouchingDirections>();
+
     }
 
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(walkSpeed * Vector2.right.x, rb.linearVelocityY);
+
+        if (touchingDirections.IsOnWall && touchingDirections.IsGrounded)
+        {
+            FlipDirection();
+        }
+
+        rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocityY);
+
+
+    }
+
+    private void FlipDirection()
+    {
+        if (WalkDirection == WalkableDirection.Right)
+        {
+            WalkDirection = WalkableDirection.Left;
+        }
+        else if (WalkDirection == WalkableDirection.Left)
+        {
+            WalkDirection = WalkableDirection.Right;
+        }
+        else
+        {
+            Debug.LogError("CUrrent walkable direction incorrecta"); 
+        }
 
 
     }
