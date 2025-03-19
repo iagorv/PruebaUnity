@@ -437,7 +437,7 @@ Transform:
   m_GameObject: {fileID: 292366544}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: -10}
+  m_LocalPosition: {x: 5.8, y: 0.39, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -580,7 +580,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: -10}
+  m_LocalPosition: {x: 5.8, y: 0.39, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3955,7 +3955,7 @@ GameObject:
   - component: {fileID: 1736898967}
   - component: {fileID: 1736898966}
   - component: {fileID: 1736898965}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8149,7 +8149,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 135966659045372996, guid: a04b5d13af987f84f844bf3336c5a231, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.63
+      value: 3.24
       objectReference: {fileID: 0}
     - target: {fileID: 135966659045372996, guid: a04b5d13af987f84f844bf3336c5a231, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8214,11 +8214,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3610486670000068419, guid: c324215c7a290ec48b3ca5dd7bb00700, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5.8
       objectReference: {fileID: 0}
     - target: {fileID: 3610486670000068419, guid: c324215c7a290ec48b3ca5dd7bb00700, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 3610486670000068419, guid: c324215c7a290ec48b3ca5dd7bb00700, type: 3}
       propertyPath: m_LocalPosition.z
