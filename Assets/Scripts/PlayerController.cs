@@ -133,6 +133,8 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocityY);
 
         animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocityY);
+        Debug.Log(IsMoving);   
+        Debug.Log(animator.GetBool(AnimationStrings.isMoving));
 
     }
 
@@ -140,7 +142,9 @@ public class PlayerController : MonoBehaviour
     {
         moveInput = context.ReadValue<Vector2>();
 
-        IsMoving = moveInput != Vector2.zero;
+        float movementThreshold = 0.1f; // Ajusta este valor según sea necesario
+        IsMoving = Mathf.Abs(moveInput.x) > movementThreshold;
+
 
         SetFacingDirection(moveInput);
 
@@ -182,7 +186,7 @@ public class PlayerController : MonoBehaviour
         if (context.started)
         {
 
-            if (context.started && touchingDirections.IsGrounded && CanMove || (Time.time - touchingDirections.lastGroundedTime <= touchingDirections.coyoteTime) && CanMove )
+            if (context.started && touchingDirections.IsGrounded && CanMove || (Time.time - touchingDirections.lastGroundedTime <= touchingDirections.coyoteTime) && CanMove)
 
             {
                 // Salto desde el suelo
