@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public float runSpeed = 8f;
     private float jumpImpulse = 9f;
 
-      private float doubleJumpImpulse = 5f;
+    private float doubleJumpImpulse = 5f;
 
     public int numSaltos = 0;
     public int numSaltosMaximos = 2;
@@ -25,22 +25,31 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
-            if (IsMoving && !touchingDirections.IsOnWall)
+            if (CanMove)
             {
-                if (IsRunning)
+                if (IsMoving && !touchingDirections.IsOnWall)
                 {
-                    return runSpeed;
+                    if (IsRunning)
+                    {
+                        return runSpeed;
 
+                    }
+                    else
+                    {
+                        return walkSpeed;
+                    }
                 }
                 else
                 {
-                    return walkSpeed;
+                    return 0;
                 }
             }
             else
             {
                 return 0;
             }
+
+
         }
     }
 
@@ -94,6 +103,15 @@ public class PlayerController : MonoBehaviour
                 transform.localScale *= new Vector2(-1, 1);
             }
             _isFacingRigth = value;
+        }
+    }
+
+    public bool CanMove
+    {
+        get
+        {
+
+            return animator.GetBool(AnimationStrings.canMove);
         }
     }
 
@@ -159,32 +177,43 @@ public class PlayerController : MonoBehaviour
 
     }
 
- public void OnJump(InputAction.CallbackContext context)
-{
-    if (context.started)
+    public void OnJump(InputAction.CallbackContext context)
     {
-   
-        if(context.started && touchingDirections.IsGrounded || Time.time - touchingDirections.lastGroundedTime <= touchingDirections.coyoteTime)
+        if (context.started)
+        {
 
-        {
-            // Salto desde el suelo
-            Jump(jumpImpulse);
-            numSaltos = 1;
-        }
-        else if (numSaltos < numSaltosMaximos)
-        {
-            // Salto en el aire (doble salto)
-              Jump(doubleJumpImpulse);
-            numSaltos = 2;
-           
+            if (context.started && touchingDirections.IsGrounded && CanMove || (Time.time - touchingDirections.lastGroundedTime <= touchingDirections.coyoteTime) && CanMove )
+
+            {
+                // Salto desde el suelo
+                Jump(jumpImpulse);
+                numSaltos = 1;
+            }
+            else if (numSaltos < numSaltosMaximos)
+            {
+                // Salto en el aire (doble salto)
+                Jump(doubleJumpImpulse);
+                numSaltos = 2;
+
+            }
         }
     }
-}
 
-    
-private void Jump(float impulso)
-{
-    animator.SetTrigger(AnimationStrings.jump);
-    rb.linearVelocity = new Vector2(rb.linearVelocityX, impulso);
-}
+
+    private void Jump(float impulso)
+    {
+        animator.SetTrigger(AnimationStrings.jumpTrigger);
+        rb.linearVelocity = new Vector2(rb.linearVelocityX, impulso);
+    }
+
+
+    public void onAttack(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+
+            animator.SetTrigger(AnimationStrings.attackTrigger);
+        }
+    }
+
 }
