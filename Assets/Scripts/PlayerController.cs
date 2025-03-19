@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
       private float doubleJumpImpulse = 5f;
 
     public int numSaltos = 0;
-    public int numSaltosMaximos = 1;
+    public int numSaltosMaximos = 2;
 
 
     TouchingDirections touchingDirections;
