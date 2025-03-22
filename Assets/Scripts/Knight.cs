@@ -7,6 +7,7 @@ using UnityEngine;
 public class Knight : MonoBehaviour
 {
     public float walkSpeed = 3f;
+    public float walkStopRate=0.6f;
     public DetectionZone attackZone;
 
 
@@ -94,7 +95,7 @@ public class Knight : MonoBehaviour
         }
         else
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocityY);
+            rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocityX,0, walkStopRate), rb.linearVelocityY);
         }
     }
 
