@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public float walkSpeed = 5f;
     public float runSpeed = 8f;
-    private float jumpImpulse = 9f;
+    private float jumpImpulse = 8f;
 
     private float doubleJumpImpulse = 5f;
 
@@ -114,6 +114,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public bool IsAlive
+    {
+        get
+        {
+            return animator.GetBool(AnimationStrings.isAlive);
+        }
+
+
+    }
+
+
+
     Rigidbody2D rb;
     Animator animator;
 
@@ -132,8 +144,7 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocityY);
 
         animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocityY);
-        Debug.Log(IsMoving);   
-        Debug.Log(animator.GetBool(AnimationStrings.isMoving));
+
 
     }
 
@@ -141,11 +152,20 @@ public class PlayerController : MonoBehaviour
     {
         moveInput = context.ReadValue<Vector2>();
 
-        float movementThreshold = 0.1f; // Ajusta este valor según sea necesario
-        IsMoving = Mathf.Abs(moveInput.x) > movementThreshold;
+        if (IsAlive)
+        {
+            float movementThreshold = 0.1f; // Ajusta este valor según sea necesario
+            IsMoving = Mathf.Abs(moveInput.x) > movementThreshold;
 
 
-        SetFacingDirection(moveInput);
+            SetFacingDirection(moveInput);
+        }
+        else
+        {
+            IsMoving = false;
+        }
+
+
 
 
     }
