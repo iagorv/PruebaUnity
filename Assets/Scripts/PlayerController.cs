@@ -10,10 +10,11 @@ public class PlayerController : MonoBehaviour
     public float walkSpeed = 5f;
     public float runSpeed = 8f;
     private float jumpImpulse = 8f;
-
+    private float wallJumpImpulse = 7f;
     private float doubleJumpImpulse = 5f;
 
     public int numSaltos = 0;
+    public bool wallJump = false;
     public int numSaltosMaximos = 2;
 
 
@@ -110,7 +111,7 @@ public class PlayerController : MonoBehaviour
         get
         {
 
-            return animator.GetBool(AnimationStrings.canMove);
+            return animator.GetBool(AnimationStrings.canMove) && animator.GetBool(AnimationStrings.isAlive);
         }
     }
 
@@ -128,6 +129,7 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D rb;
     Animator animator;
+
 
     private void Awake()
     {
@@ -205,13 +207,22 @@ public class PlayerController : MonoBehaviour
         if (context.started)
         {
 
-            if (context.started && touchingDirections.IsGrounded && CanMove || (Time.time - touchingDirections.lastGroundedTime <= touchingDirections.coyoteTime) && CanMove)
+
+            if (touchingDirections.IsGrounded && CanMove || (Time.time - touchingDirections.lastGroundedTime <= touchingDirections.coyoteTime) && CanMove)
 
             {
                 // Salto desde el suelo
                 Jump(jumpImpulse);
                 numSaltos = 1;
             }
+            else if (!touchingDirections.IsGrounded && CanMove && touchingDirections.IsOnWall && wallJump == false)
+            {
+                wallJump = true;
+                numSaltos = 1;
+                Jump(wallJumpImpulse);
+            }
+
+
             else if (numSaltos < numSaltosMaximos)
             {
                 // Salto en el aire (doble salto)
@@ -221,6 +232,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    
 
 
     private void Jump(float impulso)

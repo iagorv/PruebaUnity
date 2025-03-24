@@ -110,6 +110,7 @@ public class TouchingDirections : MonoBehaviour
             if (player != null)
             {
                 player.numSaltos = 0; // Solo se ejecuta si hay un PlayerController
+                player.wallJump=false;
             }
 
 

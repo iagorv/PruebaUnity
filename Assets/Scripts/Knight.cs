@@ -67,7 +67,7 @@ public class Knight : MonoBehaviour
     {
         get
         {
-            return animator.GetBool(AnimationStrings.canMove);
+            return animator.GetBool(AnimationStrings.canMove ) && animator.GetBool(AnimationStrings.isAlive);
         }
 
     }
