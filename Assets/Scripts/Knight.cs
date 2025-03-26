@@ -3,12 +3,14 @@ using UnityEngine;
 
 
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable))]
+
 public class Knight : MonoBehaviour
 {
     public float walkSpeed = 3f;
-    public float walkStopRate=0.6f;
+    public float walkStopRate = 0.6f;
     public DetectionZone attackZone;
+    Damageable damageable;
 
 
 
@@ -67,7 +69,7 @@ public class Knight : MonoBehaviour
     {
         get
         {
-            return animator.GetBool(AnimationStrings.canMove ) && animator.GetBool(AnimationStrings.isAlive);
+            return animator.GetBool(AnimationStrings.canMove) && animator.GetBool(AnimationStrings.isAlive);
         }
 
     }
@@ -78,6 +80,7 @@ public class Knight : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         touchingDirections = GetComponent<TouchingDirections>();
         animator = GetComponent<Animator>();
+        damageable = GetComponent<Damageable>();
 
     }
 
@@ -89,14 +92,21 @@ public class Knight : MonoBehaviour
         {
             FlipDirection();
         }
-        if (CanMove)
+
+        if (!damageable.LockVelocity)
         {
-            rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocityY);
+            if (CanMove)
+            {
+                rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocityY);
+            }
+            else
+            {
+                rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocityX, 0, walkStopRate), rb.linearVelocityY);
+            }
         }
-        else
-        {
-            rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocityX,0, walkStopRate), rb.linearVelocityY);
-        }
+
+
+
     }
 
     private void FlipDirection()
@@ -121,6 +131,13 @@ public class Knight : MonoBehaviour
     void Update()
     {
         HasTarget = attackZone.detectedColliders.Count > 0;
+
+    }
+
+    public void OnHit(int damage, Vector2 knockback)
+    {
+
+        rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocityY + knockback.y);
 
     }
 }
