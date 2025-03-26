@@ -136,6 +136,7 @@ MonoBehaviour:
   walkSpeed: 5
   runSpeed: 8
   numSaltos: 0
+  wallJump: 0
   numSaltosMaximos: 2
   _isMoving: 0
   _isRunning: 0
@@ -383,3 +384,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148e0cbde06fe044eb2aabb7e58d2269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _health: 100
+  _isAlive: 1
+  isInvencible: 0
+  invencibleTime: 0.25
