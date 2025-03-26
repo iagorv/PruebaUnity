@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Damageable : MonoBehaviour
 {
+    public UnityEvent<int, Vector2> damageableHit;
 
     Animator animator;
 
@@ -53,9 +55,16 @@ public class Damageable : MonoBehaviour
 
     private bool _isAlive = true;
     [SerializeField]
-    private bool isInvencible= false;
-    private float timeSinceHit=0;
-    public float invencibleTime=0.25f;
+    private bool isInvencible = false;
+    public bool IsHit{ get
+    {
+        return animator.GetBool(AnimationStrings.isHit);
+    }
+    private set{
+        animator.SetBool(AnimationStrings.isHit, value);
+    } }
+    private float timeSinceHit = 0;
+    public float invencibleTime = 0.25f;
 
     public bool IsAlive
     {
@@ -67,7 +76,7 @@ public class Damageable : MonoBehaviour
         {
             _isAlive = value;
             animator.SetBool(AnimationStrings.isAlive, value);
-            Debug.Log("IsAlive set: "+ value);
+            Debug.Log("IsAlive set: " + value);
         }
     }
 
@@ -83,12 +92,12 @@ public class Damageable : MonoBehaviour
 
     private void Update()
     {
-        if(isInvencible)
+        if (isInvencible)
         {
-            if(timeSinceHit > invencibleTime)
+            if (timeSinceHit > invencibleTime)
             {
                 isInvencible = false;
-                timeSinceHit=0;
+                timeSinceHit = 0;
             }
             timeSinceHit += Time.deltaTime;
 
@@ -96,13 +105,16 @@ public class Damageable : MonoBehaviour
     }
 
 
-    public bool Hit(int damage)
+    public bool Hit(int damage, Vector2 knockback)
     {
 
         if (IsAlive && !isInvencible)
         {
             Health -= damage;
-            isInvencible=true;
+            isInvencible = true;
+            IsHit=true;
+            damageableHit?.Invoke(damage, knockback);
+
             return true;
         }
         return false;

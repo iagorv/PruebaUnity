@@ -3,7 +3,7 @@ using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections),typeof(Damageable))]
 public class PlayerController : MonoBehaviour
 {
 
@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
 
     TouchingDirections touchingDirections;
+    Damageable damageable;
+
 
 
     public float CurrentMoveSpeed
@@ -136,6 +138,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchingDirections = GetComponent<TouchingDirections>();
+        damageable = GetComponent<Damageable>();
+
     }
 
 
@@ -143,7 +147,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocityY);
+
+
+        if (!damageable.IsHit)
+        {
+            rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocityY);
+        }
 
         animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocityY);
 
@@ -232,7 +241,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
+
 
 
     private void Jump(float impulso)
@@ -249,6 +258,13 @@ public class PlayerController : MonoBehaviour
 
             animator.SetTrigger(AnimationStrings.attackTrigger);
         }
+    }
+
+
+    public void OnHit(int damage, Vector2 knockback)
+    {
+
+        rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocityY + knockback.y);
     }
 
 }
