@@ -3,7 +3,7 @@ using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections),typeof(Damageable))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
 public class PlayerController : MonoBehaviour
 {
 
@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
 
 
     TouchingDirections touchingDirections;
-    Damageable damageable;
 
 
 
@@ -127,7 +126,19 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public bool LockVelocity
+    {
+        get
+        {
 
+            return animator.GetBool(AnimationStrings.lockVelocity);
+        }
+        set
+        {
+            animator.SetBool(AnimationStrings.lockVelocity, value);
+        }
+
+    }
 
     Rigidbody2D rb;
     Animator animator;
@@ -138,7 +149,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchingDirections = GetComponent<TouchingDirections>();
-        damageable = GetComponent<Damageable>();
 
     }
 
@@ -149,7 +159,7 @@ public class PlayerController : MonoBehaviour
     {
 
 
-        if (!damageable.IsHit)
+        if (!LockVelocity)
         {
             rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocityY);
         }
@@ -263,8 +273,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnHit(int damage, Vector2 knockback)
     {
-
+        LockVelocity = true;
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocityY + knockback.y);
+
+        Debug.Log($"Knockback aplicado: {rb.linearVelocity}");
     }
 
 }

@@ -403,4 +403,4 @@ MonoBehaviour:
   _health: 100
   _isAlive: 1
   isInvencible: 0
-  invencibleTime: 0.25
+  invencibleTime: 0.5
