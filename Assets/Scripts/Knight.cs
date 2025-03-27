@@ -10,6 +10,9 @@ public class Knight : MonoBehaviour
     public float walkSpeed = 3f;
     public float walkStopRate = 0.6f;
     public DetectionZone attackZone;
+    public DetectionZone cliffDetectionZone;
+
+
     Damageable damageable;
 
 
@@ -104,7 +107,7 @@ public class Knight : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (touchingDirections.IsOnWall && touchingDirections.IsGrounded)
+        if (touchingDirections.IsOnWall && touchingDirections.IsGrounded || cliffDetectionZone.detectedColliders.Count ==0)
         {
             FlipDirection();
         }
