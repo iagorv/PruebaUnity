@@ -52,6 +52,22 @@ public class Knight : MonoBehaviour
     }
 
     public bool _hasTarget = false;
+    public float AttackCooldown
+    {
+        get
+        {
+            return animator.GetFloat(AnimationStrings.attackCooldown);
+
+        }
+        private set
+        {
+            animator.SetFloat(AnimationStrings.attackCooldown, Mathf.Max(value, 0));
+        }
+
+
+
+    } 
+
     public bool HasTarget
     {
         get { return _hasTarget; }
@@ -131,6 +147,13 @@ public class Knight : MonoBehaviour
     void Update()
     {
         HasTarget = attackZone.detectedColliders.Count > 0;
+
+        if (AttackCooldown > 0)
+        {
+            AttackCooldown -= Time.deltaTime;
+
+        }
+
 
     }
 
