@@ -69,7 +69,7 @@ public class Knight : MonoBehaviour
 
 
 
-    } 
+    }
 
     public bool HasTarget
     {
@@ -107,7 +107,7 @@ public class Knight : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (touchingDirections.IsOnWall && touchingDirections.IsGrounded || cliffDetectionZone.detectedColliders.Count ==0)
+        if (touchingDirections.IsOnWall && touchingDirections.IsGrounded )
         {
             FlipDirection();
         }
@@ -166,4 +166,13 @@ public class Knight : MonoBehaviour
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocityY + knockback.y);
 
     }
+
+    public void OnCliffDetected()
+    {
+        if (touchingDirections.IsGrounded)
+        {
+            FlipDirection();
+        }
+    }
+
 }
