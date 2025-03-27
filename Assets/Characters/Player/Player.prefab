@@ -507,4 +507,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 20
-  knockback: {x: 3, y: 1}
+  knockback: {x: 2, y: 1}

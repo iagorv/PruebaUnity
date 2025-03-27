@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -128,6 +129,19 @@ public class Damageable : MonoBehaviour
         }
         return false;
 
+    }
+
+    public void Heal(int healthRestore)
+    {
+        if (IsAlive)
+        {
+            int maxHeal=Mathf.Max( MaxHealth - Health,0);
+            int actualHealth =  Mathf.Min(maxHeal,healthRestore);
+
+            Health +=actualHealth;
+            CharacterEvents.CharacterHealed(gameObject, actualHealth);
+          
+        }
     }
 
 
