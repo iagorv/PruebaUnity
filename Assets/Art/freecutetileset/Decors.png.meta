@@ -119,23 +119,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BG1_0
+      name: Decors_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 320
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 92
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5627815, y: 0.40857938}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f551b02c8a3f5fa20800000000000000
-      internalID: 3095648225022645599
+      spriteID: 3ed1ccb25ff04aa4db4e73e06147b9a6
+      internalID: 1948715037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Decors_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 62
+        height: 112
+      alignment: 9
+      pivot: {x: 0.58469045, y: 0.078059}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab2827aff6caf6843986f5683068b721
+      internalID: 2015418465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Decors_2
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 0
+        width: 59
+        height: 112
+      alignment: 9
+      pivot: {x: 0.37095436, y: 0.10853251}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a34c2d8d82c06ec44ada3b3af2794987
+      internalID: -1728662767
       vertices: []
       indices: 
       edges: []
@@ -144,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7f07f45a997628c40b8aacbcfc6ef001
     internalID: 0
     vertices: []
     indices: 
@@ -154,7 +198,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BG1_0: 3095648225022645599
+      Decors_0: 1948715037
+      Decors_1: 2015418465
+      Decors_2: -1728662767
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
